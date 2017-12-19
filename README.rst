@@ -8,25 +8,24 @@ libraries for the development of large scale web projects. Powered by strg.at_.
 .. _strg.at: http://strg.at
 
 
-score.db
-========
+score.sa.db
+===========
 
-This module provides functions and classes that implement our database
-standards and provides helper functions for automating various operations.
-We are using SQLAlchemy_ as our database connectivity and ORM_ layer.
+This module provides functions and classes for accessing your database
+conveniently using We are using SQLAlchemy_.
 
-The `narrative documentation of score.db`__ contains all the information you
+The `narrative documentation of score.sa.db`__ contains all the information you
 need to put this module to good use.
 
 .. _SQLAlchemy: http://docs.sqlalchemy.org/en/latest/
 .. _ORM: http://en.wikipedia.org/wiki/Object-relational_mapping
-__ http://www.score-framework.org/doc/python/db/
+__ http://www.score-framework.org/doc/python/sa.db/
 
 
 License
 =======
 
-Copyright © 2015,2016 STRG.AT GmbH, Vienna, Austria
+Copyright © 2017 STRG.AT GmbH, Vienna, Austria
 
 All files in and beneath this directory are part of The SCORE Framework.
 The SCORE Framework and all its parts are free software: you can redistribute

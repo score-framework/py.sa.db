@@ -133,7 +133,7 @@ class ConfiguredSaDbModule(ConfiguredModule):
         self.__ctx_connections = dict()
         if ctx and ctx_member:
             ctx.register(ctx_member,
-                         self.get_connection,
+                         self._create_connection,
                          self._close_connection)
 
     def get_connection(self, ctx):
@@ -143,6 +143,10 @@ class ConfiguredSaDbModule(ConfiguredModule):
         transaction that will be committed (or rolled back in case of an error)
         at the end of the context lifetime.
         """
+        assert isinstance(ctx, self.ctx.Context)
+        return getattr(ctx, self.ctx_member)
+
+    def _create_connection(self, ctx):
         if ctx not in self.__ctx_connections:
             connection = self.engine.connect()
             transaction = None

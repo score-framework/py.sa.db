@@ -86,6 +86,9 @@ def init(confdict, ctx=None):
         ctx_member, ctx_transaction)
 
 
+_registered_utf8mb4 = False
+
+
 def engine_from_config(config):
     """
     A wrapper around :func:`sqlalchemy.engine_from_config`, that converts
@@ -101,6 +104,7 @@ def engine_from_config(config):
     - ``sqlalchemy.pool_size`` (converted to `int`)
     - ``sqlalchemy.pool_recycle`` (converted to `int`)
     """
+    global _registered_utf8mb4
     conf = dict()
     for key in config:
         if key in ('sqlalchemy.echo', 'sqlalchemy.echo_pool',
@@ -114,6 +118,11 @@ def engine_from_config(config):
             conf[key] = int(config[key])
         else:
             conf[key] = config[key]
+    if not _registered_utf8mb4 and 'utf8mb4' in conf.get('sqlalchemy.url', ''):
+        import codecs
+        codecs.register(lambda name: codecs.lookup('utf8')
+                        if name == 'utf8mb4' else None)
+        _registered_utf8mb4 = True
     return sa.engine_from_config(conf)
 
 

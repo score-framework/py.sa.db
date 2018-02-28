@@ -1,4 +1,4 @@
-# Copyright © 2017 STRG.AT GmbH, Vienna, Austria
+# Copyright © 2017,2018 STRG.AT GmbH, Vienna, Austria
 #
 # This file is part of the The SCORE Framework.
 #
@@ -27,7 +27,7 @@
 from ._init import init, ConfiguredSaDbModule, engine_from_config
 from ._enum import Enum, EnumType
 
-__version__ = '0.0.3'
+__version__ = '0.0.4'
 
 __all__ = (
     'init', 'ConfiguredSaDbModule', 'engine_from_config', 'Enum', 'EnumType')

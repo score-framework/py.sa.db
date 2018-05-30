@@ -30,7 +30,6 @@ Provides functions specific to PostgreSQL databases.
 
 import logging
 import transaction
-from zope.sqlalchemy import mark_changed
 
 log = logging.getLogger(__name__)
 
@@ -88,4 +87,3 @@ def destroy(connection, destroyable):
             connection.execute('DROP TYPE "%s" CASCADE' % enum_type)
         for table in list_tables(connection):
             connection.execute('DROP TABLE "%s" CASCADE' % table)
-        mark_changed(connection)

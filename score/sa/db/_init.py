@@ -143,7 +143,7 @@ class ConfiguredSaDbModule(ConfiguredModule):
         if ctx and ctx_member:
             ctx.register(ctx_member,
                          self._create_connection,
-                         self._close_connection)
+                         destructor=self._close_connection)
 
     def get_connection(self, ctx):
         """

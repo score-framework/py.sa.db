@@ -1,11 +1,12 @@
 # Copyright © 2017,2018 STRG.AT GmbH, Vienna, Austria
+# Copyright © 2019 Necdet Can Ateşman, Vienna, Austria
 #
 # This file is part of the The SCORE Framework.
 #
 # The SCORE Framework and all its parts are free software: you can redistribute
 # them and/or modify them under the terms of the GNU Lesser General Public
-# License version 3 as published by the Free Software Foundation which is in the
-# file named COPYING.LESSER.txt.
+# License version 3 as published by the Free Software Foundation which is in
+# the file named COPYING.LESSER.txt.
 #
 # The SCORE Framework and all its parts are distributed without any WARRANTY;
 # without even the implied warranty of MERCHANTABILITY or FITNESS FOR A
@@ -21,8 +22,8 @@
 # concerning this License-Agreement including the issue of its valid conclusion
 # and its pre- and post-contractual effects are exclusively decided by the
 # competent court, in whose district STRG.AT GmbH has its registered seat, at
-# the discretion of STRG.AT GmbH also the competent court, in whose district the
-# Licensee has his registered seat, an establishment or assets.
+# the discretion of STRG.AT GmbH also the competent court, in whose district
+# the Licensee has his registered seat, an establishment or assets.
 
 import sqlalchemy as sa
 from score.init import (
@@ -53,16 +54,16 @@ def init(confdict, ctx=None):
         Whether destructive operations may be performed on the database. This
         value prevents accidental deletion of important data on live servers.
 
-        Note that any application feature destroying data must consult this flag
-        before proceeding!
+        Note that any application feature destroying data must consult this
+        flag before proceeding!
 
     :confkey:`ctx.member` :confdefault:`db`
         The name of the :term:`context member` providing an
         :class:`sqlalchemy.engine.Connection`. Can be the string `None` to
         indicate, that no context member should be registered.
 
-        This value is only relevant, if the optional :mod:`score.ctx` dependency
-        was configured.
+        This value is only relevant, if the optional :mod:`score.ctx`
+        dependency was configured.
 
     :confkey:`ctx.transaction` :confdefault:`True`
         Whether the context member providing the context-scoped database

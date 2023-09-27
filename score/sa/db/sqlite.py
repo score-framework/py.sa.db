@@ -58,12 +58,18 @@ def destroy(connection, destroyable):
     parameter.
     """
     assert destroyable
-    connection.execute("PRAGMA foreign_keys=OFF")
-    for trigger in list_triggers(connection):
-        connection.execute('DROP TRIGGER "%s"' % trigger)
-    for view in list_views(connection):
-        connection.execute('DROP VIEW "%s"' % view)
-    for table in list_tables(connection):
-        connection.execute('DROP TABLE "%s"' % table)
-    connection.execute("VACUUM")
-    connection.execute("PRAGMA foreign_keys=ON")
+    transaction = connection.begin()
+    try:
+        connection.execute("PRAGMA foreign_keys=OFF")
+        for trigger in list_triggers(connection):
+            connection.execute('DROP TRIGGER "%s"' % trigger)
+        for view in list_views(connection):
+            connection.execute('DROP VIEW "%s"' % view)
+        for table in list_tables(connection):
+            connection.execute('DROP TABLE "%s"' % table)
+        connection.execute("VACUUM")
+        connection.execute("PRAGMA foreign_keys=ON")
+        transaction.commit()
+    except:
+        transaction.rollback()
+        raise

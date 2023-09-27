@@ -26,11 +26,14 @@
 # the Licensee has his registered seat, an establishment or assets.
 
 
+import sqlalchemy as sa
+
+
 def list_tables(connection):
     """
     Returns a list of all table names.
     """
-    sql = "SELECT name FROM sqlite_master WHERE type = 'table'"
+    sql = sa.text("SELECT name FROM sqlite_master WHERE type = 'table'")
     return [name for (name, ) in connection.execute(sql)]
 
 
@@ -38,7 +41,7 @@ def list_views(connection):
     """
     Returns a list of all view names.
     """
-    sql = "SELECT name FROM sqlite_master WHERE type = 'view'"
+    sql = sa.text("SELECT name FROM sqlite_master WHERE type = 'view'")
     return [name for (name, ) in connection.execute(sql)]
 
 
@@ -46,7 +49,7 @@ def list_triggers(connection):
     """
     Returns a list of all trigger names.
     """
-    sql = "SELECT name FROM sqlite_master WHERE type = 'trigger'"
+    sql = sa.text("SELECT name FROM sqlite_master WHERE type = 'trigger'")
     return [name for (name, ) in connection.execute(sql)]
 
 
@@ -60,15 +63,15 @@ def destroy(connection, destroyable):
     assert destroyable
     transaction = connection.begin()
     try:
-        connection.execute("PRAGMA foreign_keys=OFF")
+        connection.execute(sa.text("PRAGMA foreign_keys=OFF"))
         for trigger in list_triggers(connection):
-            connection.execute('DROP TRIGGER "%s"' % trigger)
+            connection.execute(sa.text('DROP TRIGGER "%s"' % trigger))
         for view in list_views(connection):
-            connection.execute('DROP VIEW "%s"' % view)
+            connection.execute(sa.text('DROP VIEW "%s"' % view))
         for table in list_tables(connection):
-            connection.execute('DROP TABLE "%s"' % table)
-        connection.execute("VACUUM")
-        connection.execute("PRAGMA foreign_keys=ON")
+            connection.execute(sa.text('DROP TABLE "%s"' % table))
+        connection.execute(sa.text("VACUUM"))
+        connection.execute(sa.text("PRAGMA foreign_keys=ON"))
         transaction.commit()
     except:
         transaction.rollback()

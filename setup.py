@@ -64,6 +64,6 @@ setup(
     install_requires=[
         'score.init >= 0.3',
         'SQLAlchemy >= 0.9',
-        'zope.sqlalchemy >= 0.7',
+        'zope.sqlalchemy >= 0.7, < 1.4',
     ],
 )
